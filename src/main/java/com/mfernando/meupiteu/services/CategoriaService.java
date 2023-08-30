@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mfernando.meupiteu.domain.Categoria;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
+import com.mfernando.meupiteu.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -15,6 +16,8 @@ public class CategoriaService {
 	
 	public Categoria procurarPorId(Integer id) {
 		Optional<Categoria> opt = repo.findById(id);
-		return opt.orElse(null);
+		return opt.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()
+				));
 	}
 }

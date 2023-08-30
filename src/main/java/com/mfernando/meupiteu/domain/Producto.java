@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Producto implements Serializable{
 	private String descricao;
 	private Double preco;
 	private Boolean activo;
+	@JsonBackReference //Gerencia referencias siclicas na classe secundaria
 	@ManyToMany
 	@JoinTable(
 			name = "PRODUCTO_CATEGORIA",
