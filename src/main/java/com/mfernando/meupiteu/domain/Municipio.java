@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +22,11 @@ public class Municipio implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String municipio;
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "provincia_id")
 	private Provincia provincia;
 	
-	@OneToMany(mappedBy = "municipio")
-	private List<Endereco> enderecos = new ArrayList<>();
 	public Municipio(Integer id, String municipio, Provincia provincia) {
 		super();
 		this.id = id;

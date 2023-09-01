@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class TipoRestaurante implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String tipoRestaurante;
+	@JsonManagedReference
 	@OneToMany(mappedBy = "tipoRestaurante")
 	private List<Restaurante> restaurantes =  new ArrayList<>();
 	public TipoRestaurante() {

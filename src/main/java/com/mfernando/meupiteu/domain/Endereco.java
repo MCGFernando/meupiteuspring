@@ -3,6 +3,8 @@ package com.mfernando.meupiteu.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Endereco implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "municipio_id")
 	private Municipio municipio;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id")
 	private Restaurante restaurante;

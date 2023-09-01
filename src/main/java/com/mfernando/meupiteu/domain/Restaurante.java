@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -33,12 +36,14 @@ public class Restaurante implements Serializable{
 	private Boolean activo;
 	private Date dataCadastro;
 	private Date dataActualizacao;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "tipo_restaurante_id")
 	private TipoRestaurante tipoRestaurante;
 	@ElementCollection
 	@CollectionTable(name = "TAGS")
 	private Set<String> tags = new HashSet<>();
+	@JsonManagedReference //Gerencia referencias siclicas na classe principal
 	@OneToMany(mappedBy = "restaurante")
 	private List<Endereco> enderecos = new ArrayList<>();
 	public Restaurante() {
