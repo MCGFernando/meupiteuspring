@@ -1,6 +1,7 @@
 package com.mfernando.meupiteu;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +12,14 @@ import com.mfernando.meupiteu.domain.Categoria;
 import com.mfernando.meupiteu.domain.Municipio;
 import com.mfernando.meupiteu.domain.Producto;
 import com.mfernando.meupiteu.domain.Provincia;
+import com.mfernando.meupiteu.domain.Restaurante;
+import com.mfernando.meupiteu.domain.TipoRestaurante;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
 import com.mfernando.meupiteu.repositories.MunicipioRepository;
 import com.mfernando.meupiteu.repositories.ProductoRepository;
 import com.mfernando.meupiteu.repositories.ProvinciaRepository;
+import com.mfernando.meupiteu.repositories.RestauranteRepository;
+import com.mfernando.meupiteu.repositories.TipoRestauranteRepository;
 
 @SpringBootApplication
 public class MeupiteuApplication implements CommandLineRunner{
@@ -27,6 +32,10 @@ public class MeupiteuApplication implements CommandLineRunner{
 	private ProvinciaRepository provinciaRepository;
 	@Autowired
 	private MunicipioRepository municipioRepository;
+	@Autowired
+	private TipoRestauranteRepository tipoRestRepository;
+	@Autowired
+	private RestauranteRepository restauranteRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MeupiteuApplication.class, args);
 	}
@@ -68,6 +77,19 @@ public class MeupiteuApplication implements CommandLineRunner{
 		
 		provinciaRepository.saveAll(Arrays.asList(prov1, prov2));
 		municipioRepository.saveAll(Arrays.asList(mun1, mun2, mun3, mun4, mun5));
+		
+		
+		TipoRestaurante tiporest1 = new TipoRestaurante(null, "Angolana");
+		TipoRestaurante tiporest2 = new TipoRestaurante(null, "Japonesa");
+		
+		Restaurante rest1 = new Restaurante(null, "Sushi Rest", "Restaurante de comida japoneza", 0.5, new Date(), new Date(), true, new Date(), new Date(), tiporest2);
+		Restaurante rest2 = new Restaurante(null, "Panela de Barro", "Restaurante de comida angolana", 0.5, new Date(), new Date(), true, new Date(), new Date(), tiporest1);
+		
+		tiporest1.getRestaurantes().addAll(Arrays.asList(rest2));
+		tiporest2.getRestaurantes().addAll(Arrays.asList(rest1));
+		
+		tipoRestRepository.saveAll(Arrays.asList(tiporest1, tiporest2));
+		restauranteRepository.saveAll(Arrays.asList(rest1, rest2));
 	}
 
 }
