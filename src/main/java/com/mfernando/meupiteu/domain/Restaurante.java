@@ -2,8 +2,12 @@ package com.mfernando.meupiteu.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +33,9 @@ public class Restaurante implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "tipo_restaurante_id")
 	private TipoRestaurante tipoRestaurante;
+	@ElementCollection
+	@CollectionTable(name = "TAGS")
+	private Set<String> tags = new HashSet<>();
 	public Restaurante() {
 		super();
 		// TODO Auto-generated constructor stub
