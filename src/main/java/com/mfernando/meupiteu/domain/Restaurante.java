@@ -1,8 +1,10 @@
 package com.mfernando.meupiteu.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Restaurante implements Serializable{
@@ -36,6 +39,8 @@ public class Restaurante implements Serializable{
 	@ElementCollection
 	@CollectionTable(name = "TAGS")
 	private Set<String> tags = new HashSet<>();
+	@OneToMany(mappedBy = "restaurante")
+	private List<Endereco> enderecos = new ArrayList<>();
 	public Restaurante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -114,6 +119,19 @@ public class Restaurante implements Serializable{
 	}
 	public void setTipoRestaurante(TipoRestaurante tipoRestaurante) {
 		this.tipoRestaurante = tipoRestaurante;
+	}
+	
+	public Set<String> getTags() {
+		return tags;
+	}
+	public void setTags(Set<String> tags) {
+		this.tags = tags;
+	}
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 	@Override
 	public int hashCode() {

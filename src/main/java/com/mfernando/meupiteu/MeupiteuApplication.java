@@ -9,12 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.mfernando.meupiteu.domain.Categoria;
+import com.mfernando.meupiteu.domain.Endereco;
 import com.mfernando.meupiteu.domain.Municipio;
 import com.mfernando.meupiteu.domain.Producto;
 import com.mfernando.meupiteu.domain.Provincia;
 import com.mfernando.meupiteu.domain.Restaurante;
 import com.mfernando.meupiteu.domain.TipoRestaurante;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
+import com.mfernando.meupiteu.repositories.EnderecoRepository;
 import com.mfernando.meupiteu.repositories.MunicipioRepository;
 import com.mfernando.meupiteu.repositories.ProductoRepository;
 import com.mfernando.meupiteu.repositories.ProvinciaRepository;
@@ -36,6 +38,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 	private TipoRestauranteRepository tipoRestRepository;
 	@Autowired
 	private RestauranteRepository restauranteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MeupiteuApplication.class, args);
 	}
@@ -84,12 +88,19 @@ public class MeupiteuApplication implements CommandLineRunner{
 		
 		Restaurante rest1 = new Restaurante(null, "Sushi Rest", "Restaurante de comida japoneza", 0.5, new Date(), new Date(), true, new Date(), new Date(), tiporest2);
 		Restaurante rest2 = new Restaurante(null, "Panela de Barro", "Restaurante de comida angolana", 0.5, new Date(), new Date(), true, new Date(), new Date(), tiporest1);
+		rest1.getTags().addAll(Arrays.asList("Bebidas","Bar","Comida"));
+		rest2.getTags().addAll(Arrays.asList("Cervejas","Bar","Restaurante"));
 		
 		tiporest1.getRestaurantes().addAll(Arrays.asList(rest2));
 		tiporest2.getRestaurantes().addAll(Arrays.asList(rest1));
 		
 		tipoRestRepository.saveAll(Arrays.asList(tiporest1, tiporest2));
 		restauranteRepository.saveAll(Arrays.asList(rest1, rest2));
+		
+		Endereco ende1 = new Endereco(null, "Av 21 Janeiro, casa 1", "Gamek", "Inorade 2", "Por detraz do inamete", mun1, rest2);
+		Endereco ende2 = new Endereco(null, "Av 21 Fevereiro, casa 112", "Baixa", "Caala", "Por detraz do kero", mun4, rest1);
+		
+		enderecoRepository.saveAll(Arrays.asList(ende1, ende2));
 	}
 
 }
