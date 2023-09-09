@@ -1,8 +1,10 @@
 package com.mfernando.meupiteu.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 @Entity
 public class Utilizador implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,9 @@ public class Utilizador implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id", nullable = true)
 	private Restaurante restaurante;
+	@JsonBackReference
+	@OneToMany(mappedBy = "utilizador")
+	private List<Pedido> pedidos = new ArrayList<>();
 	public Utilizador() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -105,6 +111,13 @@ public class Utilizador implements Serializable{
 	}
 	public void setRestaurante(Restaurante restaurante) {
 		this.restaurante = restaurante;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	@Override
 	public int hashCode() {

@@ -28,7 +28,7 @@ public class Endereco implements Serializable{
 	private Municipio municipio;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "restaurante_id")
+	@JoinColumn(name = "restaurante_id", nullable = true)
 	private Restaurante restaurante;
 
 	public Endereco() {

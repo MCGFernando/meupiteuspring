@@ -11,15 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.mfernando.meupiteu.domain.Categoria;
 import com.mfernando.meupiteu.domain.Endereco;
 import com.mfernando.meupiteu.domain.Municipio;
+import com.mfernando.meupiteu.domain.Pedido;
 import com.mfernando.meupiteu.domain.Producto;
 import com.mfernando.meupiteu.domain.Provincia;
 import com.mfernando.meupiteu.domain.Restaurante;
 import com.mfernando.meupiteu.domain.TipoRestaurante;
 import com.mfernando.meupiteu.domain.Utilizador;
+import com.mfernando.meupiteu.domain.enums.EstadoPedido;
 import com.mfernando.meupiteu.domain.enums.TipoUtilizador;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
 import com.mfernando.meupiteu.repositories.EnderecoRepository;
 import com.mfernando.meupiteu.repositories.MunicipioRepository;
+import com.mfernando.meupiteu.repositories.PedidoRepository;
 import com.mfernando.meupiteu.repositories.ProductoRepository;
 import com.mfernando.meupiteu.repositories.ProvinciaRepository;
 import com.mfernando.meupiteu.repositories.RestauranteRepository;
@@ -45,6 +48,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private UtilizadorRepository utilizadorRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MeupiteuApplication.class, args);
 	}
@@ -106,8 +111,9 @@ public class MeupiteuApplication implements CommandLineRunner{
 		
 		Endereco ende1 = new Endereco(null, "Av 21 Janeiro, casa 1", "Gamek", "Inorade 2", "Por detraz do inamete", mun1, rest2);
 		Endereco ende2 = new Endereco(null, "Av 21 Fevereiro, casa 112", "Baixa", "Caala", "Por detraz do kero", mun4, rest1);
+		Endereco ende3 = new Endereco(null, "Av Albano Machado, Nº 62", "Ingombotas", "Sagrada Familia", "Por detraz do Caixa Angola", mun4, null);
 		
-		enderecoRepository.saveAll(Arrays.asList(ende1, ende2));
+		enderecoRepository.saveAll(Arrays.asList(ende1, ende2, ende3));
 		
 		Utilizador utili1 = new Utilizador(null, "Maro Fernando", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.ADMIN,  null);
 		Utilizador utili2 = new Utilizador(null, "Maro Fernando Qwner 1", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.OWNER,  rest1);
@@ -118,6 +124,9 @@ public class MeupiteuApplication implements CommandLineRunner{
 		utili2.getTelefones().addAll(Arrays.asList("925925955"));
 		utili4.getTelefones().addAll(Arrays.asList("945965988"));
 		utilizadorRepository.saveAll(Arrays.asList(utili1, utili2, utili3, utili4, utili5, utili6));
+		
+		Pedido ped1 = new Pedido(null, "P001", 2000.0, 1500.0, 3500.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili6, ende3, rest2);
+		pedidoRepository.saveAll(Arrays.asList(ped1));
 	}
 
 }

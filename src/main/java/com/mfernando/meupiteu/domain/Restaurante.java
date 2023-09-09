@@ -52,6 +52,9 @@ public class Restaurante implements Serializable{
 	@JsonManagedReference
 	@OneToMany(mappedBy = "restaurante")
 	private List<Utilizador> utilizadores = new ArrayList<>();
+	@JsonBackReference
+	@OneToMany(mappedBy = "restaurante")
+	private List<Pedido> pedidos = new ArrayList<>();
 	public Restaurante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -157,6 +160,13 @@ public class Restaurante implements Serializable{
 	}
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	@Override
 	public int hashCode() {
