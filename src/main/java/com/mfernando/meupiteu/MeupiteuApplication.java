@@ -15,6 +15,8 @@ import com.mfernando.meupiteu.domain.Producto;
 import com.mfernando.meupiteu.domain.Provincia;
 import com.mfernando.meupiteu.domain.Restaurante;
 import com.mfernando.meupiteu.domain.TipoRestaurante;
+import com.mfernando.meupiteu.domain.Utilizador;
+import com.mfernando.meupiteu.domain.enums.TipoUtilizador;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
 import com.mfernando.meupiteu.repositories.EnderecoRepository;
 import com.mfernando.meupiteu.repositories.MunicipioRepository;
@@ -22,6 +24,7 @@ import com.mfernando.meupiteu.repositories.ProductoRepository;
 import com.mfernando.meupiteu.repositories.ProvinciaRepository;
 import com.mfernando.meupiteu.repositories.RestauranteRepository;
 import com.mfernando.meupiteu.repositories.TipoRestauranteRepository;
+import com.mfernando.meupiteu.repositories.UtilizadorRepository;
 
 @SpringBootApplication
 public class MeupiteuApplication implements CommandLineRunner{
@@ -40,6 +43,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 	private RestauranteRepository restauranteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private UtilizadorRepository utilizadorRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MeupiteuApplication.class, args);
 	}
@@ -90,6 +95,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 		Restaurante rest2 = new Restaurante(null, "Panela de Barro", "Restaurante de comida angolana", 0.5, new Date(), new Date(), true, new Date(), new Date(), tiporest1);
 		rest1.getTags().addAll(Arrays.asList("Bebidas","Bar","Comida"));
 		rest2.getTags().addAll(Arrays.asList("Cervejas","Bar","Restaurante"));
+		rest1.getTelefones().addAll(Arrays.asList("923923923","991991991"));
+		rest2.getTelefones().addAll(Arrays.asList("954954954","929929929"));
 		
 		tiporest1.getRestaurantes().addAll(Arrays.asList(rest2));
 		tiporest2.getRestaurantes().addAll(Arrays.asList(rest1));
@@ -101,6 +108,16 @@ public class MeupiteuApplication implements CommandLineRunner{
 		Endereco ende2 = new Endereco(null, "Av 21 Fevereiro, casa 112", "Baixa", "Caala", "Por detraz do kero", mun4, rest1);
 		
 		enderecoRepository.saveAll(Arrays.asList(ende1, ende2));
+		
+		Utilizador utili1 = new Utilizador(null, "Maro Fernando", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.ADMIN,  null);
+		Utilizador utili2 = new Utilizador(null, "Maro Fernando Qwner 1", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.OWNER,  rest1);
+		Utilizador utili3 = new Utilizador(null, "Maro Fernando Employee 1", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest1);
+		Utilizador utili4 = new Utilizador(null, "Maro Fernando Qwner 2", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.OWNER,  rest2);
+		Utilizador utili5 = new Utilizador(null, "Maro Fernando Employee 2", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest2);
+		Utilizador utili6 = new Utilizador(null, "Maro Fernando Customer", "maro@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.CUSTOMER,  null);
+		utili2.getTelefones().addAll(Arrays.asList("925925955"));
+		utili4.getTelefones().addAll(Arrays.asList("945965988"));
+		utilizadorRepository.saveAll(Arrays.asList(utili1, utili2, utili3, utili4, utili5, utili6));
 	}
 
 }

@@ -43,9 +43,15 @@ public class Restaurante implements Serializable{
 	@ElementCollection
 	@CollectionTable(name = "TAGS")
 	private Set<String> tags = new HashSet<>();
+	@ElementCollection
+	@CollectionTable(name = "TELEFONES_RESTAURANTE")
+	private Set<String> telefones = new HashSet<>();
 	@JsonManagedReference //Gerencia referencias siclicas na classe principal
 	@OneToMany(mappedBy = "restaurante")
 	private List<Endereco> enderecos = new ArrayList<>();
+	@JsonManagedReference
+	@OneToMany(mappedBy = "restaurante")
+	private List<Utilizador> utilizadores = new ArrayList<>();
 	public Restaurante() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -137,6 +143,20 @@ public class Restaurante implements Serializable{
 	}
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+	
+	public List<Utilizador> getUtilizadores() {
+		return utilizadores;
+	}
+	public void setUtilizadores(List<Utilizador> utilizadores) {
+		this.utilizadores = utilizadores;
+	}
+	
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
 	}
 	@Override
 	public int hashCode() {
