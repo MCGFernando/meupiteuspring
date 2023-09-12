@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CollectionTable;
@@ -36,7 +37,7 @@ public class Restaurante implements Serializable{
 	private Boolean activo;
 	private Date dataCadastro;
 	private Date dataActualizacao;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "tipo_restaurante_id")
 	private TipoRestaurante tipoRestaurante;
@@ -52,7 +53,7 @@ public class Restaurante implements Serializable{
 	@JsonManagedReference
 	@OneToMany(mappedBy = "restaurante")
 	private List<Utilizador> utilizadores = new ArrayList<>();
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "restaurante")
 	private List<Pedido> pedidos = new ArrayList<>();
 	public Restaurante() {

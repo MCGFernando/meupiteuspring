@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mfernando.meupiteu.domain.enums.TipoUtilizador;
 
 import jakarta.persistence.CollectionTable;
@@ -35,11 +36,11 @@ public class Utilizador implements Serializable{
 	@CollectionTable(name = "TELEFONES")
 	private Set<String> telefones = new HashSet<>();
 	private Integer tipoUtilizador;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id", nullable = true)
 	private Restaurante restaurante;
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "utilizador")
 	private List<Pedido> pedidos = new ArrayList<>();
 	public Utilizador() {

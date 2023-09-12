@@ -20,4 +20,9 @@ public class CategoriaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()
 				));
 	}
+
+	public Categoria inserir(Categoria obj) {
+		// TODO Auto-generated method stub
+		return repo.saveAndFlush(obj);
+	}
 }

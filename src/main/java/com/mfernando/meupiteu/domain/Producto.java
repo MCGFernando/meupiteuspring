@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Producto implements Serializable{
 	private String descricao;
 	private Double preco;
 	private Boolean activo;
-	@JsonBackReference //Gerencia referencias siclicas na classe secundaria
+	@JsonIgnoreProperties("categorias") //Gerencia referencias siclicas na classe secundaria
 	@ManyToMany
 	@JoinTable(
 			name = "PRODUCTO_CATEGORIA",
