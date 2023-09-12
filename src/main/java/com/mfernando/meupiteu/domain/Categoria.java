@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -23,7 +24,9 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@JsonBackReference //Gerencia referencias siclicas na classe principal
+	//@JsonManagedReference //Gerencia referencias siclicas na classe principal
+	//@JsonBackReference
+	@JsonIgnoreProperties("categorias") 
 	@ManyToMany(mappedBy = "categorias")
 	private List<Producto> productos = new ArrayList<>();
 	

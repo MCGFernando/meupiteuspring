@@ -30,7 +30,8 @@ public class Producto implements Serializable{
 	private String descricao;
 	private Double preco;
 	private Boolean activo;
-	@JsonIgnoreProperties("categorias") //Gerencia referencias siclicas na classe secundaria
+	//@JsonIgnore
+	//@JsonIgnoreProperties("categorias") //Gerencia referencias siclicas na classe secundaria
 	@ManyToMany
 	@JoinTable(
 			name = "PRODUCTO_CATEGORIA",

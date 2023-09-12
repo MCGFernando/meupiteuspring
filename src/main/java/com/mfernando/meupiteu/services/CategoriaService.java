@@ -1,5 +1,6 @@
 package com.mfernando.meupiteu.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui productos");
 		}
 		
+	}
+
+	public List<Categoria> procuraTodos() {
+		return  repo.findAll();
 	}
 }

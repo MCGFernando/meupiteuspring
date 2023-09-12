@@ -22,6 +22,12 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> findAll() {
+		List<Categoria>  obj = service.procuraTodos();
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		Categoria obj = service.procurarPorId(id);
