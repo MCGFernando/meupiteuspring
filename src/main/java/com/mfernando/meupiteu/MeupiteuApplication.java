@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.mfernando.meupiteu.domain.Categoria;
 import com.mfernando.meupiteu.domain.Endereco;
+import com.mfernando.meupiteu.domain.ItemPedido;
 import com.mfernando.meupiteu.domain.Municipio;
 import com.mfernando.meupiteu.domain.Pedido;
 import com.mfernando.meupiteu.domain.Producto;
@@ -21,6 +22,7 @@ import com.mfernando.meupiteu.domain.enums.EstadoPedido;
 import com.mfernando.meupiteu.domain.enums.TipoUtilizador;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
 import com.mfernando.meupiteu.repositories.EnderecoRepository;
+import com.mfernando.meupiteu.repositories.ItemPedidoRepository;
 import com.mfernando.meupiteu.repositories.MunicipioRepository;
 import com.mfernando.meupiteu.repositories.PedidoRepository;
 import com.mfernando.meupiteu.repositories.ProductoRepository;
@@ -50,6 +52,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 	private UtilizadorRepository utilizadorRepository;
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(MeupiteuApplication.class, args);
 	}
@@ -126,7 +130,18 @@ public class MeupiteuApplication implements CommandLineRunner{
 		utilizadorRepository.saveAll(Arrays.asList(utili1, utili2, utili3, utili4, utili5, utili6));
 		
 		Pedido ped1 = new Pedido(null, "P001", 2000.0, 1500.0, 3500.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili6, ende3, rest2);
-		pedidoRepository.saveAll(Arrays.asList(ped1));
+		Pedido ped2 = new Pedido(null, "P002", 3000.0, 2500.0, 5500.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili1, ende3, rest1);
+		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+		
+		ItemPedido itemPed1 = new ItemPedido(ped1, prod3, 1, 1000.0, 0.0, 0.0, 1000.0, "Pedido 1");
+		ItemPedido itemPed2 = new ItemPedido(ped1, prod1, 1, 2500.0, 0.0, 0.0, 2500.0, "Pedido 1");
+		
+		ItemPedido itemPed3 = new ItemPedido(ped2, prod1, 1, 1000.0, 0.0, 0.0, 1000.0, "Pedido 2");
+		ItemPedido itemPed4 = new ItemPedido(ped2, prod2, 1, 2000.0, 0.0, 0.0, 2000.0, "Pedido 3");
+		ItemPedido itemPed5 = new ItemPedido(ped2, prod3, 1, 2500.0, 0.0, 0.0, 2500.0, "Pedido 4");
+		
+		itemPedidoRepository.saveAll(Arrays.asList(itemPed1, itemPed2, itemPed3, itemPed4, itemPed5));
+		
 	}
 
 }

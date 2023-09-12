@@ -2,7 +2,9 @@ package com.mfernando.meupiteu.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mfernando.meupiteu.domain.enums.EstadoPedido;
@@ -14,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 @Entity
 public class Pedido implements Serializable {
 	/**
@@ -43,9 +46,12 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id")
 	private Restaurante restaurante;
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
 	public Pedido() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -145,6 +151,13 @@ public class Pedido implements Serializable {
 	}
 	public void setRestaurante(Restaurante restaurante) {
 		this.restaurante = restaurante;
+	}
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 	@Override
 	public int hashCode() {
