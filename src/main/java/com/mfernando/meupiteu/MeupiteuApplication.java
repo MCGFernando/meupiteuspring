@@ -63,7 +63,12 @@ public class MeupiteuApplication implements CommandLineRunner{
 		
 		Categoria cat1 = new Categoria(null, "Bebidas");
 		Categoria cat2 = new Categoria(null, "Aperitivos");
-		
+		Categoria cat3 = new Categoria(null, "Laticínios");
+		Categoria cat4 = new Categoria(null, "Carnes");
+		Categoria cat5 = new Categoria(null, "Frutas");
+		Categoria cat6 = new Categoria(null, "Legumes");
+		Categoria cat7 = new Categoria(null, "Limpeza");
+		Categoria cat8 = new Categoria(null, "Higiene Pessoal");
 		
 		Producto prod1 = new Producto(null, "Coca-Cola", 500.0, true);
 		Producto prod2 = new Producto(null, "Pastel de Natas", 350.0, true);
@@ -76,7 +81,7 @@ public class MeupiteuApplication implements CommandLineRunner{
 		prod2.getCategorias().addAll(Arrays.asList(cat2));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
 		productoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 		
 		

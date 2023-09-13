@@ -7,11 +7,13 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,6 +31,17 @@ public class CategoriaResource {
 	public ResponseEntity<?> findAll() {
 		List<Categoria>  lstCategoria = service.procuraTodos();
 		List<CategoriaDTO>  lstObj = lstCategoria.stream().map(c -> new CategoriaDTO(c)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(lstObj);
+	}
+	
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	public ResponseEntity<?> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
+			@RequestParam(value = "orderDirection", defaultValue = "DESC") String orderDirection, 
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+		Page<Categoria>  lstCategoria = service.procuraPagina(page, linesPerPage, orderDirection, orderBy);
+		Page<CategoriaDTO>  lstObj = lstCategoria.map(c -> new CategoriaDTO(c));
 		return ResponseEntity.ok().body(lstObj);
 	}
 	
