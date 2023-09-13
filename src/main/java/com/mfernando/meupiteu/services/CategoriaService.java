@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mfernando.meupiteu.domain.Categoria;
+import com.mfernando.meupiteu.dto.CategoriaDTO;
 import com.mfernando.meupiteu.repositories.CategoriaRepository;
 import com.mfernando.meupiteu.services.exceptions.DataIntegrityException;
 import com.mfernando.meupiteu.services.exceptions.ObjectNotFoundException;
@@ -57,5 +58,9 @@ public class CategoriaService {
 	public Page<Categoria> procuraPagina(Integer page, Integer linesPerPage, String orderDirection, String orderBy){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(orderDirection), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO (CategoriaDTO obj) {
+		return new Categoria(obj.getId(), obj.getNome());
 	}
 }

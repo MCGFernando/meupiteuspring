@@ -1,11 +1,14 @@
 package com.mfernando.meupiteu.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.mfernando.meupiteu.domain.Categoria;
-import com.mfernando.meupiteu.domain.Producto;
 
 public class CategoriaDTO implements Serializable{
 	/**
@@ -13,6 +16,8 @@ public class CategoriaDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	@NotBlank(message = "Campo de preenchimento obrigatório")
+	@Length(min = 5, max = 80, message = "Campo deve ter entre 5 e 80 caracteres")
 	private String nome;
 	public CategoriaDTO() {
 		super();
