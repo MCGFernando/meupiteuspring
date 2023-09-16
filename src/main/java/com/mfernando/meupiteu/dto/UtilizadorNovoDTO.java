@@ -10,7 +10,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.mfernando.meupiteu.domain.Utilizador;
-
+import com.mfernando.meupiteu.services.validation.UtilizadorInsert;
+@UtilizadorInsert
 public class UtilizadorNovoDTO implements Serializable{
 	/**
 	 * 
@@ -20,6 +21,7 @@ public class UtilizadorNovoDTO implements Serializable{
 	@NotEmpty(message = "Campo de preenchimento obrigatório")
 	@Length(min = 5, max = 120, message = "Campo deve ter entre 5 e 120 caracteres")
 	private String nome;
+	private String bi;
 	@NotEmpty(message = "Campo de preenchimento obrigatório")
 	@Email(message = "Este valor não é um endereço de e-mail válido")
 	private String email;
@@ -43,6 +45,15 @@ public class UtilizadorNovoDTO implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public String getBi() {
+		return bi;
+	}
+
+	public void setBi(String bi) {
+		this.bi = bi;
+	}
+
 	public String getEmail() {
 		return email;
 	}

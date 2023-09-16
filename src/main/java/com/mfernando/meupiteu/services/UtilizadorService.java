@@ -58,7 +58,7 @@ public class UtilizadorService {
 		if(utilizador.getRestaurante() != null) {
 			throw new DataIntegrityException("Não é possível excluir um utilizador");
 		}
-		
+		/*Regra para delecao quando o utilizador tem pedidos no sistema */
 		try {
 			repo.deleteById(id);
 		}catch (DataIntegrityViolationException e) {
@@ -76,13 +76,13 @@ public class UtilizadorService {
 	}
 
 	public Utilizador fromDTO(UtilizadorDTO obj) {
-		return new Utilizador(obj.getId(), obj.getNome(), obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
+		return new Utilizador(obj.getId(), obj.getNome(), obj.getBi() , obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
 		//throw new UnsupportedOperationException();
 	}
 
 	public Utilizador fromDTO(UtilizadorNovoDTO obj) {
 		Restaurante restaurante = obj.getRestauranteId() == null ? null:new Restaurante(obj.getRestauranteId(), null, null, null, null, null, null, null, null, null);
-		Utilizador utilizador =  new Utilizador(null, obj.getNome(), obj.getEmail(), obj.getSenha(), new Date(), null, TipoUtilizador.toEnum(obj.getTipoUtilizador()), restaurante);
+		Utilizador utilizador =  new Utilizador(null, obj.getNome(), obj.getBi(), obj.getEmail(), obj.getSenha(), new Date(), null, TipoUtilizador.toEnum(obj.getTipoUtilizador()), restaurante);
 		for (String telefone : obj.getTelefones()) {
 			utilizador.getTelefones().add(telefone);
 		}
