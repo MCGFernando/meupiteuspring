@@ -47,9 +47,10 @@ public class UtilizadorService {
 		novoObj.setId(obj.getId());
 		novoObj.setDataActualizado(new Date());
 		//novoObj.setDataCadastro(null);
-		novoObj.setEmail(obj.getEmail()!=null?obj.getEmail():novoObj.getEmail());
-		novoObj.setNome(obj.getNome()!=null?obj.getNome():novoObj.getNome());
-		novoObj.setSenha(obj.getSenha()!=null?obj.getSenha():novoObj.getSenha());
+		novoObj.setEmail(obj.getBi());
+		novoObj.setEmail(obj.getEmail());
+		novoObj.setNome(obj.getNome());
+		novoObj.setSenha(obj.getSenha());
 	}
 
 	public void remover(Integer id) {
@@ -77,7 +78,6 @@ public class UtilizadorService {
 
 	public Utilizador fromDTO(UtilizadorDTO obj) {
 		return new Utilizador(obj.getId(), obj.getNome(), obj.getBi() , obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
-		//throw new UnsupportedOperationException();
 	}
 
 	public Utilizador fromDTO(UtilizadorNovoDTO obj) {
@@ -88,8 +88,6 @@ public class UtilizadorService {
 		}
 		
 		return utilizador;
-		//return new Utilizador(obj.getId(), obj.getNome(), obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
-		//throw new UnsupportedOperationException();
 	}
 
 	

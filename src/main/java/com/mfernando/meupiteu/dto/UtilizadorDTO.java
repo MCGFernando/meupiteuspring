@@ -8,7 +8,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.mfernando.meupiteu.domain.Utilizador;
-
+import com.mfernando.meupiteu.services.validation.UtilizadorUpdate;
+@UtilizadorUpdate
 public class UtilizadorDTO implements Serializable{
 	/**
 	 * 
