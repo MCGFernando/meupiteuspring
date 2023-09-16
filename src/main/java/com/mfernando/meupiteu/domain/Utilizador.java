@@ -56,7 +56,7 @@ public class Utilizador implements Serializable{
 		this.senha = senha;
 		this.dataCadastro = dataCadastro;
 		this.dataActualizado = dataActualizado;
-		this.tipoUtilizador = tipoUtilizador.getCodigo();
+		this.tipoUtilizador = (tipoUtilizador==null) ? null : tipoUtilizador.getCodigo();
 		this.restaurante = restaurante;
 	}
 	public Integer getId() {
