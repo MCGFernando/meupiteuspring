@@ -53,7 +53,12 @@ public class UtilizadorService {
 	}
 
 	public void remover(Integer id) {
-		procurarPorId(id);
+		Utilizador utilizador= procurarPorId(id);
+		
+		if(utilizador.getRestaurante() != null) {
+			throw new DataIntegrityException("Não é possível excluir um utilizador");
+		}
+		
 		try {
 			repo.deleteById(id);
 		}catch (DataIntegrityViolationException e) {
