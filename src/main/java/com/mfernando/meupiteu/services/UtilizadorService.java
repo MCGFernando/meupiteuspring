@@ -11,8 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.mfernando.meupiteu.domain.Restaurante;
 import com.mfernando.meupiteu.domain.Utilizador;
+import com.mfernando.meupiteu.domain.enums.TipoUtilizador;
 import com.mfernando.meupiteu.dto.UtilizadorDTO;
+import com.mfernando.meupiteu.dto.UtilizadorNovoDTO;
 import com.mfernando.meupiteu.repositories.UtilizadorRepository;
 import com.mfernando.meupiteu.services.exceptions.DataIntegrityException;
 import com.mfernando.meupiteu.services.exceptions.ObjectNotFoundException;
@@ -30,8 +33,8 @@ public class UtilizadorService {
 	}
 
 	public Utilizador inserir(Utilizador obj) {
-		// TODO Auto-generated method stub
-		return null;
+		obj.setId(null);
+		return repo.save(obj);
 	}
 
 	public Utilizador actualizar(Utilizador obj) {
@@ -69,6 +72,18 @@ public class UtilizadorService {
 
 	public Utilizador fromDTO(UtilizadorDTO obj) {
 		return new Utilizador(obj.getId(), obj.getNome(), obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
+		//throw new UnsupportedOperationException();
+	}
+
+	public Utilizador fromDTO(UtilizadorNovoDTO obj) {
+		Restaurante restaurante = obj.getRestauranteId() == null ? null:new Restaurante(obj.getRestauranteId(), null, null, null, null, null, null, null, null, null);
+		Utilizador utilizador =  new Utilizador(null, obj.getNome(), obj.getEmail(), obj.getSenha(), new Date(), null, TipoUtilizador.toEnum(obj.getTipoUtilizador()), restaurante);
+		for (String telefone : obj.getTelefones()) {
+			utilizador.getTelefones().add(telefone);
+		}
+		
+		return utilizador;
+		//return new Utilizador(obj.getId(), obj.getNome(), obj.getEmail(), obj.getSenha(), null, obj.getDataActualizado(), null, null);
 		//throw new UnsupportedOperationException();
 	}
 

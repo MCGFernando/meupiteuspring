@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mfernando.meupiteu.domain.Utilizador;
 import com.mfernando.meupiteu.dto.UtilizadorDTO;
+import com.mfernando.meupiteu.dto.UtilizadorNovoDTO;
 import com.mfernando.meupiteu.services.UtilizadorService;
 
 @RestController
@@ -52,8 +53,8 @@ public class UtilizadorResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Void> insert(@Valid @RequestBody UtilizadorDTO objDTO) {
-		Utilizador obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody UtilizadorNovoDTO objNovoDTO) {
+		Utilizador obj = service.fromDTO(objNovoDTO);
 		obj = service.inserir(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
