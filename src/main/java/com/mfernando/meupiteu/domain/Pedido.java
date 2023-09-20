@@ -74,6 +74,16 @@ public class Pedido implements Serializable {
 		this.endereco = endereco;
 		this.restaurante = restaurante;
 	}
+	
+	public Double getTotal() {
+		Double soma = 0.0;
+		for (ItemPedido item : itens) {
+			soma += item.getSubTotal();
+		}
+		
+		return soma;
+		
+	}
 	public Integer getId() {
 		return id;
 	}
