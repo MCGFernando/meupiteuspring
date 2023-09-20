@@ -73,16 +73,35 @@ public class MeupiteuApplication implements CommandLineRunner{
 		Producto prod1 = new Producto(null, "Coca-Cola", 500.0, true);
 		Producto prod2 = new Producto(null, "Pastel de Natas", 350.0, true);
 		Producto prod3 = new Producto(null, "Sprite", 500.0, true);
+		Producto prod4 = new Producto(null, "Tomate", 500.0, true);
+		Producto prod5 = new Producto(null, "Sprite", 500.0, true);
+		Producto prod6 = new Producto(null, "Batata", 500.0, true);
+		Producto prod7 = new Producto(null, "Peito de Frango", 500.0, true);
+		Producto prod8 = new Producto(null, "Costela de Porco", 500.0, true);
+		Producto prod9 = new Producto(null, "Batata Chips", 500.0, true);
+		Producto prod10 = new Producto(null, "Água Mineral", 500.0, true);
+		Producto prod11 = new Producto(null, "Manteiga", 500.0, true);
 		
-		cat1.getProductos().addAll(Arrays.asList(prod1, prod3));
-		cat2.getProductos().addAll(Arrays.asList(prod2));
+		cat1.getProductos().addAll(Arrays.asList(prod1, prod3,prod5,prod10));
+		cat2.getProductos().addAll(Arrays.asList(prod2,prod9));
+		cat6.getProductos().addAll(Arrays.asList(prod4,prod6));
+		cat4.getProductos().addAll(Arrays.asList(prod7,prod8));
+		cat3.getProductos().addAll(Arrays.asList(prod11));
 		
 		prod1.getCategorias().addAll(Arrays.asList(cat1));
 		prod2.getCategorias().addAll(Arrays.asList(cat2));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
+		prod4.getCategorias().addAll(Arrays.asList(cat6));
+		prod5.getCategorias().addAll(Arrays.asList(cat1));
+		prod6.getCategorias().addAll(Arrays.asList(cat6));
+		prod7.getCategorias().addAll(Arrays.asList(cat4));
+		prod8.getCategorias().addAll(Arrays.asList(cat4));
+		prod9.getCategorias().addAll(Arrays.asList(cat2));
+		prod10.getCategorias().addAll(Arrays.asList(cat1));
+		prod11.getCategorias().addAll(Arrays.asList(cat3));
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8));
-		productoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
+		productoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11));
 		
 		
 
