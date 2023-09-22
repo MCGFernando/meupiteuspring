@@ -26,10 +26,10 @@ public class Pedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String codigoPedido;
-	private Double subTotal;
+	//private String codigoPedido;
+	//private Double subTotal;
 	private Double taxaFrete;
-	private Double valorTotal;
+	//private Double valorTotal;
 	private Date dataCriacao;
 	@Column(nullable = true)
 	private Date dataConfirmacao;
@@ -56,15 +56,15 @@ public class Pedido implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Pedido(Integer id, String codigoPedido, Double subTotal, Double taxaFrete, Double valorTotal,
+	public Pedido(Integer id/*, String codigoPedido, Double subTotal*/, Double taxaFrete/*, Double valorTotal*/,
 			Date dataCriacao, Date dataConfirmacao, Date dataEntrega, Date dataCancelamento, EstadoPedido estadoPedido,
 			Utilizador utilizador, Endereco endereco, Restaurante restaurante) {
 		super();
 		this.id = id;
-		this.codigoPedido = codigoPedido;
-		this.subTotal = subTotal;
+		//this.codigoPedido = codigoPedido;
+		//this.subTotal = subTotal;
 		this.taxaFrete = taxaFrete;
-		this.valorTotal = valorTotal;
+		//this.valorTotal = valorTotal;
 		this.dataCriacao = dataCriacao;
 		this.dataConfirmacao = dataConfirmacao;
 		this.dataEntrega = dataEntrega;
@@ -90,7 +90,7 @@ public class Pedido implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getCodigoPedido() {
+	/*public String getCodigoPedido() {
 		return codigoPedido;
 	}
 	public void setCodigoPedido(String codigoPedido) {
@@ -101,19 +101,19 @@ public class Pedido implements Serializable {
 	}
 	public void setSubTotal(Double subTotal) {
 		this.subTotal = subTotal;
-	}
+	}*/
 	public Double getTaxaFrete() {
 		return taxaFrete;
 	}
 	public void setTaxaFrete(Double taxaFrete) {
 		this.taxaFrete = taxaFrete;
 	}
-	public Double getValorTotal() {
+	/*public Double getValorTotal() {
 		return valorTotal;
 	}
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
-	}
+	}*/
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}

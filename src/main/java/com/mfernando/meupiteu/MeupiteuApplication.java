@@ -153,8 +153,8 @@ public class MeupiteuApplication implements CommandLineRunner{
 		utili4.getTelefones().addAll(Arrays.asList("945965988"));
 		utilizadorRepository.saveAll(Arrays.asList(utili1, utili2, utili3, utili4, utili5, utili6));
 		
-		Pedido ped1 = new Pedido(null, "P001", 2000.0, 1500.0, 3500.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili6, ende3, rest2);
-		Pedido ped2 = new Pedido(null, "P002", 3000.0, 2500.0, 5500.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili1, ende3, rest1);
+		Pedido ped1 = new Pedido(null,  0.0,  new Date(), null, null, null, EstadoPedido.CRIADO, utili6, ende3, rest2);
+		Pedido ped2 = new Pedido(null, 0.0, new Date(), null, null, null, EstadoPedido.CRIADO, utili1, ende3, rest1);
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		
 		ItemPedido itemPed1 = new ItemPedido(ped1, prod3, 1, 1000.0, 0.0, 0.0, 1000.0, "Pedido 1");

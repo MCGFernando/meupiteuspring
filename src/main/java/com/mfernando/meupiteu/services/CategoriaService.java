@@ -28,10 +28,11 @@ public class CategoriaService {
 				));
 	}
 
+	
 	public Categoria inserir(Categoria obj) {
 		// TODO Auto-generated method stub
 		obj.setId(null);
-		return repo.saveAndFlush(obj);
+		return repo.save(obj);
 	}
 
 	public Categoria actualizar(Categoria obj) {
