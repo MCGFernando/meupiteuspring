@@ -71,7 +71,7 @@ public class PedidoService {
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
 		//System.out.println(obj);
-		emailService.sendOrderConfirmationEmail(obj);
+		//emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 	public Pedido fromDTO(PedidoNovoDTO objDTO) {
