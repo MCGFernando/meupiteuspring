@@ -37,6 +37,8 @@ public class PedidoService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	private EmailService emailService;
 	public Pedido procurarPorId(Integer id) {
 		Optional<Pedido> opt = repo.findById(id);
 		return opt.orElseThrow(() -> new ObjectNotFoundException(
@@ -68,7 +70,8 @@ public class PedidoService {
 			item.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		//System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 	public Pedido fromDTO(PedidoNovoDTO objDTO) {
