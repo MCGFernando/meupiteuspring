@@ -1,8 +1,11 @@
 package com.mfernando.meupiteu.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -183,6 +186,27 @@ public class Pedido implements Serializable {
 			return false;
 		Pedido other = (Pedido) obj;
 		return Objects.equals(id, other.id);
+	}
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "AO"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido Número: ");
+		builder.append(getId());
+		builder.append(", Data: ");
+		builder.append(sdf.format(getDataCriacao()));
+		builder.append(", Cliente: ");
+		builder.append(getUtilizador().getNome());
+		builder.append(", Situação de Pagamento: ");
+		builder.append(getEstadoPedido().getDescricao());
+		builder.append("\nDetalhes:\n");
+		for (ItemPedido item : getItens()) {
+			builder.append(item.toString());
+		}
+		builder.append("Valor total: ");
+		builder.append(nf.format(getTotal()));
+		return builder.toString();
 	}
 	
 	

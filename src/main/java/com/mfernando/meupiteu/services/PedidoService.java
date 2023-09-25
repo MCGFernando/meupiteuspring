@@ -68,6 +68,7 @@ public class PedidoService {
 			item.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 	public Pedido fromDTO(PedidoNovoDTO objDTO) {
