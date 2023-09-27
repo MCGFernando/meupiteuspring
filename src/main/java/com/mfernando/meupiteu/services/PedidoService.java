@@ -37,8 +37,8 @@ public class PedidoService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	@Autowired
-	private EmailService emailService;
+	/*@Autowired
+	private EmailService emailService;*/
 	public Pedido procurarPorId(Integer id) {
 		Optional<Pedido> opt = repo.findById(id);
 		return opt.orElseThrow(() -> new ObjectNotFoundException(
