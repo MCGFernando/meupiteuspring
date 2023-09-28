@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mfernando.meupiteu.domain.Categoria;
@@ -52,6 +53,8 @@ public class DBService {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	public void instantiateTestDatabase() {
 		Categoria cat1 = new Categoria(null, "Bebidas");
 		Categoria cat2 = new Categoria(null, "Aperitivos");
@@ -135,12 +138,12 @@ public class DBService {
 		
 		enderecoRepository.saveAll(Arrays.asList(ende1, ende2, ende3));
 		
-		Utilizador utili1 = new Utilizador(null, "Maro Fernando","", "marofernando1991@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.ADMIN,  null);
-		Utilizador utili2 = new Utilizador(null, "Maro Fernando Qwner 1","", "marofernando1991+user2@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.OWNER,  rest1);
-		Utilizador utili3 = new Utilizador(null, "Maro Fernando Employee 1","", "marofernando1991+user3@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest1);
-		Utilizador utili4 = new Utilizador(null, "Maro Fernando Qwner 2","", "marofernando1991+user4@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.OWNER,  rest2);
-		Utilizador utili5 = new Utilizador(null, "Maro Fernando Employee 2","", "marofernando1991+user5@gmail.com", "123456",new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest2);
-		Utilizador utili6 = new Utilizador(null, "Maro Fernando Customer","", "marofernando1991+user6@gmail.coms", "123456",new Date(), new Date(), TipoUtilizador.CUSTOMER,  null);
+		Utilizador utili1 = new Utilizador(null, "Maro Fernando","", "marofernando1991@gmail.com", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.ADMIN,  null);
+		Utilizador utili2 = new Utilizador(null, "Maro Fernando Qwner 1","", "marofernando1991+user2@gmail.com", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.OWNER,  rest1);
+		Utilizador utili3 = new Utilizador(null, "Maro Fernando Employee 1","", "marofernando1991+user3@gmail.com", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest1);
+		Utilizador utili4 = new Utilizador(null, "Maro Fernando Qwner 2","", "marofernando1991+user4@gmail.com", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.OWNER,  rest2);
+		Utilizador utili5 = new Utilizador(null, "Maro Fernando Employee 2","", "marofernando1991+user5@gmail.com", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.EMPLOYEE,  rest2);
+		Utilizador utili6 = new Utilizador(null, "Maro Fernando Customer","", "marofernando1991+user6@gmail.coms", passwordEncoder.encode("123456"),new Date(), new Date(), TipoUtilizador.CUSTOMER,  null);
 		utili2.getTelefones().addAll(Arrays.asList("925925955"));
 		utili4.getTelefones().addAll(Arrays.asList("945965988"));
 		utilizadorRepository.saveAll(Arrays.asList(utili1, utili2, utili3, utili4, utili5, utili6));

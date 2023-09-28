@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mfernando.meupiteu.domain.Restaurante;
@@ -24,6 +25,8 @@ import com.mfernando.meupiteu.services.exceptions.ObjectNotFoundException;
 public class UtilizadorService {
 	@Autowired
 	private UtilizadorRepository repo;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public Utilizador procurarPorId(Integer id) {
 		Optional<Utilizador> opt = repo.findById(id);
@@ -82,7 +85,7 @@ public class UtilizadorService {
 
 	public Utilizador fromDTO(UtilizadorNovoDTO obj) {
 		Restaurante restaurante = obj.getRestauranteId() == null ? null:new Restaurante(obj.getRestauranteId(), null, null, null, null, null, null, null, null, null);
-		Utilizador utilizador =  new Utilizador(null, obj.getNome(), obj.getBi(), obj.getEmail(), obj.getSenha(), new Date(), null, TipoUtilizador.toEnum(obj.getTipoUtilizador()), restaurante);
+		Utilizador utilizador =  new Utilizador(null, obj.getNome(), obj.getBi(), obj.getEmail(), passwordEncoder.encode( obj.getSenha()), new Date(), null, TipoUtilizador.toEnum(obj.getTipoUtilizador()), restaurante);
 		for (String telefone : obj.getTelefones()) {
 			utilizador.getTelefones().add(telefone);
 		}
