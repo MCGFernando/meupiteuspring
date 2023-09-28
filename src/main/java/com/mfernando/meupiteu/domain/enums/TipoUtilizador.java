@@ -1,10 +1,10 @@
 package com.mfernando.meupiteu.domain.enums;
 
 public enum TipoUtilizador {
-	ADMIN(1, "Administrador do Sistema"),
-	OWNER(2, "Proprietário"),
-	EMPLOYEE(3, "Funcionário"),
-	CUSTOMER(4, "Cliente");
+	ADMIN(1, "ROLE_ADMIN"),
+	OWNER(2, "ROLE_OWNER"),
+	EMPLOYEE(3, "ROLE_EMPLOYEE"),
+	CUSTOMER(4, "ROLE_CUSTOMER");
 	private int codigo;
 	private String descricao;
 	private TipoUtilizador(Integer codigo, String descricao) {

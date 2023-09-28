@@ -30,7 +30,6 @@ public class Utilizador implements Serializable{
 	private String nome;
 	private String bi;
 	private String email;
-	@JsonIgnore
 	private String senha;
 	private Date dataCadastro;
 	private Date dataActualizado;
