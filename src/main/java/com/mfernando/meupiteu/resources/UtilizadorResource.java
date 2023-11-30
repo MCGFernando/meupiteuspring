@@ -44,9 +44,9 @@ public class UtilizadorResource {
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<?> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
-			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
+			@RequestParam(value = "linesPerPage", defaultValue = "2") Integer linesPerPage, 
 			@RequestParam(value = "orderDirection", defaultValue = "DESC") String orderDirection, 
-			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy) {
+			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy) {
 		Page<Utilizador>  lstUtilizador = service.procuraPagina(page, linesPerPage, orderDirection, orderBy);
 		Page<UtilizadorDTO>  lstObj = lstUtilizador.map(c -> new UtilizadorDTO(c));
 		return ResponseEntity.ok().body(lstObj);
